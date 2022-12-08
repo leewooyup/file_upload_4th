@@ -17,7 +17,11 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/**")
-                .permitAll();
+                .permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/member/login")
+                .loginProcessingUrl("/member/login");
         return http.build();
     }
 
