@@ -1,4 +1,13 @@
-<div>안녕</div>
+<html lang="ko"
+      xmlns:th="http://thymeleaf.org"
+>
+<header th:if="${loginedMember != null}">
+    <h2>[[${loginedMember.username}]]</h2>
+    <img th:src="@{${loginedMemberProfileImgUrl}}" width="150px" style="object-fit:cover;border-radius:10px;" alt="">
+</header>
+
+<hr>
+<div>안녕하세요</div>
 
 <div>
     [[${param.errorMsg}]]
