@@ -1,14 +1,23 @@
+<!DOCTYPE html>
 <html lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}"
       xmlns:th="http://thymeleaf.org"
 >
-<header th:if="${loginedMember != null}">
-    <h2>[[${loginedMember.username}]]</h2>
-    <img th:src="@{${loginedMemberProfileImgUrl}}" width="150px" style="object-fit:cover;border-radius:10px;" alt="">
-</header>
+<head>
+    <title>메인</title>
+</head>
 
-<hr>
-<div>안녕하세요</div>
-
-<div>
-    [[${param.errorMsg}]]
-</div>
+<body>
+<section layout:fragment="content">
+    <div class="container">
+        <header th:if="${loginedMember != null}">
+            <div>[[${loginedMember.username}]]</div>
+            <img th:src="@{${loginedMemberProfileImgUrl}}" width="500px" alt="">
+        </header>
+        <hr>
+        <div>안녕하세요</div>
+    </div>
+</section>
+</body>
+</html>

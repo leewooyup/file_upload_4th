@@ -1,19 +1,32 @@
+<!DOCTYPE html>
 <html lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}"
       xmlns:th="http://thymeleaf.org"
 >
-<h1>프로파일</h1>
 
-<style>
-    .profile-img {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        border-radius: 10px;
-    }
+<head>
+    <title>프로파일</title>
+</head>
 
-</style>
+<body>
+<section layout:fragment="content">
+    <div class="container">
+        <h1>프로파일</h1>
+        <style>
+            .profile-img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 10px;
+            }
 
-<img class="profile-img" th:src="@{|/gen/${loginedMember.profileImg}|}">
-<div>아이디: <span th:text="${loginedMember.username}"></span></div>
-<div>이메일: <span th:text="${loginedMember.email}"></span></div>
+        </style>
+
+        <img class="profile-img" th:src="@{|/gen/${loginedMember.profileImg}|}">
+        <div>아이디: <span th:text="${loginedMember.username}"></span></div>
+        <div>이메일: <span th:text="${loginedMember.email}"></span></div>
+    </div>
+</section>
+</body>
 </html>
