@@ -23,7 +23,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class MemberService implements UserDetailsService {
+public class MemberService {
     @Value("${custom.genFileDirPath}")
     private String genFileDirPath;
 
@@ -78,16 +78,6 @@ public class MemberService implements UserDetailsService {
 
     public Member getMemberById(Long id) {
         return memberRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberRepository.findByUsername(username).get();
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("member"));
-
-        return new User(member.getUsername(), member.getPassword(), authorities);
     }
 
     public long count() {
