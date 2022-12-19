@@ -1,5 +1,12 @@
 package com.ll.exam.fileUpload1205.app.util;
 
+import org.apache.tika.Tika;
+import org.springframework.web.client.RestTemplate;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
@@ -18,5 +25,37 @@ public class Util {
                     .map(f -> f.substring(filename.lastIndexOf(".") + 1))
                     .orElse("");
         }
+
+        public static String downloadImg(String url, String filePath) {
+            // 부모 디렉터리가 없으면 만들어라
+            new File(filePath).getParentFile().mkdirs();
+
+            // url을 통해 이미지를 받고 저장해라
+            byte[] imageBytes = new RestTemplate().getForObject(url, byte[].class);
+            try {
+                Files.write(Paths.get(filePath), imageBytes);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            String mimeType = null;
+            try {
+                // 확장자 감지
+                mimeType = new Tika().detect(new File(filePath));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            // 알아낸 확장자로 바꾸기
+            String ext = mimeType.replaceAll("image/", "");
+            ext = ext.replaceAll("jpeg", "jpg");
+
+            String newFilePath = filePath + "." + ext;
+            // 확장자까지 붙인 바뀐파일 경로를 리턴
+            new File(filePath).renameTo(new File(newFilePath));
+
+            return newFilePath;
+        }
     }
+
+
 }
