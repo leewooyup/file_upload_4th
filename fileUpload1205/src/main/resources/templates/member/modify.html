@@ -34,7 +34,7 @@
             </div>
             <div>
                 <span>기존 프로필이미지</span>
-                <img th:src="@{|/member/profile/img/${#authentication.principal.id}|}" class="w-10 h-10 rounded object-cover">
+                <img th:src="@{${#authentication.principal.profileImgRedirectUrl}}" class="w-10 h-10 rounded object-cover">
 
                 <label>
                     삭제

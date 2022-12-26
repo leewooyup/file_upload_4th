@@ -96,7 +96,7 @@ public class MemberController {
         if(profileImgUrl == null) {
             profileImgUrl = "https://via.placeholder.com/100x100.png?text=U_U";
         }
-        
+
         URI redirectUri = new URI(profileImgUrl);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(redirectUri);
