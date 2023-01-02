@@ -1,5 +1,6 @@
 package com.ll.exam.fileUpload1205.app.base.entiy;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -11,6 +12,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -30,6 +33,10 @@ public class BaseEntity {
 
     @LastModifiedDate
     private LocalDateTime modifyDate;
+
+    @Transient
+    @Builder.Default
+    private Map<String, Object> extra = new LinkedHashMap<>();
 
     public BaseEntity(long id) {
         this.id = id;
