@@ -10,6 +10,7 @@ import com.ll.exam.fileUpload1205.app.security.dto.MemberContext;
 import com.ll.exam.fileUpload1205.app.util.Util;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.Banner;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -61,5 +62,11 @@ public class ArticleController {
         model.addAttribute("article", article);
 
         return "article/detail";
+    }
+
+    @GetMapping("/{id}/json/forDebug")
+    @ResponseBody
+    public Article showDetailJson(Model model, @PathVariable Long id) {
+        return articleService.getForPrintArticleById(id);
     }
 }
